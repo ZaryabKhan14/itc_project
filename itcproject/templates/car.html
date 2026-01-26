@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Details - LuxeWheels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-[#1a0a3d] via-[#3b1f5b] to-[#2c1f4e] min-h-screen text-white">
+
+<header class="w-full fixed top-0 left-0 z-50 bg-transparent">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <img src="{{ url_for('static', filename='Adobe Express - file (1).png') }}" class="h-20 md:h-24">
+    <div class="flex space-x-4">
+      <a href="/" class="px-3 py-1.5 border-2 border-[#7b5dd7] rounded-full text-sm text-white hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0]">Home</a>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-36 flex justify-center px-6">
+  <div class="max-w-7xl w-full flex gap-10 items-start">
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden mt-2">
+      <h1 class="text-2xl font-bold text-[#4b3c7a] text-center p-3 bg-[#f2effb] rounded-t-3xl">Car Details</h1>
+      <form id="car-form" class="px-6 py-4 space-y-2">
+        <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+          <label class="text-sm font-semibold text-[#4b3c7a]">Brand</label>
+          <input id="Brand" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Model</label>
+            <input id="Model" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Year</label>
+            <input id="Year" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+        </div>
+        <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+          <label class="text-sm font-semibold text-[#4b3c7a]">Fuel</label>
+          <input id="Fuel" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Transmission</label>
+            <input id="Transmission" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Mileage</label>
+            <input id="Mileage" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Price</label>
+            <input id="Price" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Status</label>
+            <input id="Status" class="bg-white text-gray-800 text-sm rounded px-1 py-0.5" />
+          </div>
+        </div>
+        <div class="flex justify-center pt-4">
+          <button type="button" onclick="saveStatus()" class="px-8 py-1.5 rounded-full bg-gradient-to-r from-[#7b5dd7] to-[#9b72f0] text-white text-sm font-semibold hover:shadow-lg">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="flex-1 flex justify-center items-center mt-8">
+      <img src="{{ url_for('static', filename='/car-removebg-preview.png')}}" alt="Car Image" class="w-full max-w-lg scale-90 object-contain opacity-95"/>
+    </div>
+  </div>
+</main>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const carId = urlParams.get('id');
+  let carData = null;
+
+  function loadCar() {
+    fetch(`/api/cars/${carId}`)
+      .then(res => res.json())
+      .then(data => {
+        carData = data;
+        document.getElementById('Brand').value = data.Brand;
+        document.getElementById('Model').value = data.Model;
+        document.getElementById('Year').value = data.Year;
+        document.getElementById('Fuel').value = data.Fuel;
+        document.getElementById('Transmission').value = data.Transmission;
+        document.getElementById('Mileage').value = data.Mileage;
+        document.getElementById('Price').value = data.Price;
+        document.getElementById('Status').value = data.Status;
+      });
+  }
+
+  function saveStatus() {
+    const updated = {...carData, Status: document.getElementById('Status').value };
+    fetch('/api/cars/save', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(updated)
+    })
+    .then(res=>res.json())
+    .then(data=> {
+      alert('Status updated!');
+      loadCar();
+      window.location.href = "/";
+
+    });
+  }
+
+  loadCar();
+</script>
+</body>
+</html>

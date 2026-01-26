@@ -1,0 +1,27 @@
+1)python -m venv myenv
+used to create virtual environment
+
+2).\myenv\Scripts\Activate
+used for activating virtual environment
+
+3)pip install uv 
+used for installing uv package manager
+
+4)pip install flask
+used for installing flask
+
+5)uv init itcproject 
+used to create a project
+
+6) docker build -t muhammadzaryabkhan/itc-project:0.0.1.RELEASE .
+used for building docker image 
+
+
+7)docker container run -d -p 3000:3000 muhammadzaryabkhan/itc-project:0.0.1.RELEASE
+USED TO run docker image
+
+8)docker stop $(docker ps -q)
+To stop all running containers:
+
+9)docker ps
+to check running dockers

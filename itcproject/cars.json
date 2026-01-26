@@ -1,0 +1,122 @@
+[
+    {
+        "ID": "001",
+        "Brand": "BMW",
+        "Model": "I8",
+        "Year": 2014,
+        "Fuel": "Hybrid",
+        "Transmission": "Automatic",
+        "Mileage": "18,000 km",
+        "Price": "$58,000",
+        "Status": "Available",
+        "Actions": ""
+    },
+    {
+        "ID": "002",
+        "Brand": "Audi",
+        "Model": "A6",
+        "Year": 2021,
+        "Fuel": "Diesel",
+        "Transmission": "Automatic",
+        "Mileage": "25,400 km",
+        "Price": "$46,500",
+        "Status": "Pending",
+        "Actions": ""
+    },
+    {
+        "Actions": "",
+        "Brand": "Mercedes",
+        "Fuel": "Petrol",
+        "ID": "003",
+        "Mileage": "30,200 km",
+        "Model": "C300",
+        "Price": "$42,000",
+        "Status": "Pending",
+        "Transmission": "Automatic",
+        "Year": 2019
+    },
+    {
+        "ID": "004",
+        "Brand": "Tesla",
+        "Model": "Model S",
+        "Year": 2022,
+        "Fuel": "Electric",
+        "Transmission": "Automatic",
+        "Mileage": "12,500 km",
+        "Price": "$80,000",
+        "Status": "Available",
+        "Actions": ""
+    },
+    {
+        "ID": "005",
+        "Brand": "Toyota",
+        "Model": "Corolla",
+        "Year": 2020,
+        "Fuel": "Petrol",
+        "Transmission": "Manual",
+        "Mileage": "22,000 km",
+        "Price": "$18,500",
+        "Status": "Pending",
+        "Actions": ""
+    },
+    {
+        "Actions": "",
+        "Brand": "Honda",
+        "Fuel": "Petrol",
+        "ID": "006",
+        "Mileage": "28,400 km",
+        "Model": "Civic",
+        "Price": "$20,000",
+        "Status": "Available",
+        "Transmission": "Automatic",
+        "Year": "2018"
+    },
+    {
+        "ID": "007",
+        "Brand": "Ford",
+        "Model": "Mustang",
+        "Year": 2021,
+        "Fuel": "Petrol",
+        "Transmission": "Manual",
+        "Mileage": "15,000 km",
+        "Price": "$55,000",
+        "Status": "Pending",
+        "Actions": ""
+    },
+    {
+        "ID": "008",
+        "Brand": "Chevrolet",
+        "Model": "Camaro",
+        "Year": 2019,
+        "Fuel": "Petrol",
+        "Transmission": "Automatic",
+        "Mileage": "20,500 km",
+        "Price": "$40,000",
+        "Status": "Available",
+        "Actions": ""
+    },
+    {
+        "ID": "009",
+        "Brand": "Lexus",
+        "Model": "RX 350",
+        "Year": 2022,
+        "Fuel": "Hybrid",
+        "Transmission": "Automatic",
+        "Mileage": "10,300 km",
+        "Price": "$48,000",
+        "Status": "Available",
+        "Actions": ""
+    },
+    {
+        "ID": "010",
+        "Brand": "Volkswagen",
+        "Model": "Golf GTI",
+        "Year": 2020,
+        "Fuel": "Petrol",
+        "Transmission": "Manual",
+        "Mileage": "18,700 km",
+        "Price": "$30,000",
+        "Status": "Pending",
+        "Actions": ""
+    }
+]
