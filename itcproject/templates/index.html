@@ -10,102 +10,160 @@
     body { font-family: 'Raleway', 'Lato', sans-serif; }
   </style>
 </head>
+
 <body class="bg-gradient-to-b from-[#1a0a3d] via-[#3b1f5b] to-[#2c1f4e] text-white min-h-screen">
 
 <header class="w-full fixed top-0 left-0 z-50 bg-transparent">
   <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-0">
-    <div><img src="{{ url_for('static', filename='Adobe Express - file (1).png') }}" alt="LuxeWheels Logo" class="h-32 md:h-36"></div>
-    <div class="flex space-x-4 items-center">
-      <a href="/" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Home</a>
-      {# <a href="#" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Contact Us</a> #}
-    </div>
+    <div><img src="{{ url_for('static', filename='Adobe Express - file (1).png') }}" class="h-32 md:h-36"></div>
+    <a href="/" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Home</a>
   </nav>
 </header>
 
-<section class="flex flex-col justify-start items-center text-center min-h-[65vh] pt-16 md:pt-20 lg:pt-24">
-  <h1 class="text-4xl md:text-5xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-500">LuxeWheels</h1>
-  <p class="text-base md:text-lg text-gray-300 mb-6 max-w-lg">
-        Drive your dreams. Buy, sell, and explore</br>the finest cars in style.
+<section id="listingSection" class="flex flex-col justify-start items-center text-center min-h-[65vh] pt-16 md:pt-20 lg:pt-24">
+
+<h1 class="text-4xl md:text-5xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-indigo-500 to-blue-500">LuxeWheels</h1>
+
+<p class="text-base md:text-lg text-gray-300 mb-6 max-w-lg">
+Drive your dreams. Buy, sell, and explore<br>the finest cars in style.
 </p>
-  <!-- Buttons -->
-{#  <div class="flex flex-col sm:flex-row gap-2 mb-4">
-    <a href="#" class="px-5 py-2 border-2 border-[#7b5dd7] rounded-full text-white text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0]">
-      Browse Cars
-    </a>
-    <a href="#" class="px-5 py-2 border-2 border-[#7b5dd7] rounded-full text-white text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0]">
-      Sell Your Car
-    </a>
-  </div>
-#}
-<!-- Search Section -->
+
 <div class="w-full max-w-md flex flex-col items-center gap-4 mt-4">
-
-
-
-  <!-- Search by Brand or Model -->
   <div class="flex items-center gap-2">
-    <input 
-      id="search" 
-      type="text" 
-      placeholder="Search cars by Brand or Model..." 
-      class="w-72 py-1.5 px-4 rounded-full bg-white text-gray-800 placeholder-gray-400 text-xs shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#7b5dd7]" 
-      oninput="getSearch()"
-    />
-    <button 
-      onclick="getSearch()" 
-      class="py-1.5 px-4 rounded-full bg-gradient-to-r from-[#7b5dd7] to-[#9b72f0] text-white text-xs font-semibold shadow-md hover:shadow-lg transition-all duration-300"
-    >
+    <input id="search" type="text" placeholder="Search cars by Brand or Model..."
+      class="w-72 py-1.5 px-4 rounded-full bg-white text-gray-800 text-xs shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#7b5dd7]"
+      oninput="getSearch()">
+    <button onclick="getSearch()" class="py-1.5 px-4 rounded-full bg-gradient-to-r from-[#7b5dd7] to-[#9b72f0] text-white text-xs font-semibold shadow-md hover:shadow-lg">
       Search
     </button>
   </div>
-
 </div>
 
+<div class="w-full flex justify-center mt-5">
+  <div class="w-[900px] bg-white rounded-xl shadow-md border border-[#e6e1f5] overflow-hidden">
+    <div class="px-4 py-2 bg-[#f2effb] border-b border-[#dcd6f2]">
+      <h2 class="text-base font-semibold text-[#3b2a6d]">Car Listings</h2>
+    </div>
 
-  <!-- Table -->
-  <div class="w-full flex justify-center mt-5">
-    <div class="w-[900px] bg-white rounded-xl shadow-md border border-[#e6e1f5] overflow-hidden">
-      <div class="px-4 py-2 bg-[#f2effb] border-b border-[#dcd6f2]">
-        <h2 class="text-base font-semibold text-[#3b2a6d]">Car Listings</h2>
-      </div>
-        <div class="max-h-[220px] overflow-y-auto bg-white rounded-b-xl">
-        <table class="w-full text-sm text-left text-gray-700">
-          <thead class="sticky top-0 bg-[#ebe7f8] text-[#4b3c7a]">
-            <tr class="h-12">
-              <th class="px-3 font-semibold">ID</th>
-              <th class="px-3 font-semibold">Brand</th>
-              <th class="px-3 font-semibold">Model</th>
-              <th class="px-3 font-semibold">Year</th>
-              <th class="px-3 font-semibold">Fuel</th>
-              <th class="px-3 font-semibold">Transmission</th>
-              <th class="px-3 font-semibold">Mileage</th>
-              <th class="px-3 font-semibold">Price</th>
-              <th class="px-3 font-semibold">Status</th>
-              <th class="px-3 font-semibold text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="car-list"></tbody>
-        </table>
-      </div>
+    <div class="max-h-[220px] overflow-y-auto bg-white rounded-b-xl">
+      <table class="w-full text-sm text-left text-gray-700">
+        <thead class="sticky top-0 bg-[#ebe7f8] text-[#4b3c7a]">
+          <tr class="h-12">
+            <th class="px-3">ID</th>
+            <th class="px-3">Brand</th>
+            <th class="px-3">Model</th>
+            <th class="px-3">Year</th>
+            <th class="px-3">Fuel</th>
+            <th class="px-3">Transmission</th>
+            <th class="px-3">Mileage</th>
+            <th class="px-3">Price</th>
+            <th class="px-3">Status</th>
+            <th class="px-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="car-list"></tbody>
+      </table>
     </div>
   </div>
+</div>
 </section>
 
+<main id="carDetailsSection" class="pt-36 flex justify-center px-6 hidden">
+  <div class="max-w-7xl w-full flex gap-10 items-start">
+
+    <div class="w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden mt-2">
+      <h1 class="text-2xl font-bold text-[#4b3c7a] text-center p-3 bg-[#f2effb] rounded-t-3xl">Car Details</h1>
+
+      <form id="car-form" class="px-6 py-4 space-y-2">
+        <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+          <label class="text-sm font-semibold text-[#4b3c7a]">Brand</label>
+          <input id="Brand" class="bg-transparent text-sm text-[#4b3c7a]" />
+        </div>
+
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Model</label>
+            <input id="Model" class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Year</label>
+            <input id="Year" class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+        </div>
+
+        <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+          <label class="text-sm font-semibold text-[#4b3c7a]">Fuel</label>
+          <input id="Fuel" class="bg-transparent text-sm text-[#4b3c7a]" />
+        </div>
+
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Transmission</label>
+            <input id="Transmission" class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Mileage</label>
+            <input id="Mileage" class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Price</label>
+            <input id="Price" class="bg-transparent text-sm text-[#4b3c7a]" />
+          </div>
+
+          <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
+            <label class="text-sm font-semibold text-[#4b3c7a]">Status</label>
+            <input id="Status" class="bg-white text-gray-800 text-sm rounded px-1 py-0.5" />
+          </div>
+        </div>
+
+        <div class="flex justify-center pt-4">
+          <button type="button" onclick="saveStatus()" class="px-8 py-1.5 rounded-full bg-gradient-to-r from-[#7b5dd7] to-[#9b72f0] text-white text-sm font-semibold hover:shadow-lg">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="flex-1 flex justify-center items-center mt-8">
+      <img src="{{ url_for('static', filename='/car-removebg-preview.png')}}" class="w-full max-w-lg scale-90 object-contain opacity-95"/>
+    </div>
+
+  </div>
+</main>
+
+
 <script>
-  function fetchCars() {
-    fetch('/api/cars')
-      .then(res => res.json())
-      .then(data => displayCars(data))
-      .catch(error => {
+const urlParams = new URLSearchParams(window.location.search);
+const carId = urlParams.get("id");
+let carData = null;
+
+
+if(carId){
+  listingSection.style.display = "none";
+  carDetailsSection.style.display = "flex";
+  loadCar();
+} else {
+  fetchCars();
+}
+
+  
+function fetchCars() {
+  fetch('/api/cars')
+    .then(res => res.json())
+    .then(displayCars)
+     .catch(error => {
         console.error(error);
 
       alert("Unable to load car listings. Please try again later.");
       });
-  }
-  
-  
+}
 
-  function displayCars(cars) {
+function displayCars(cars) {
     const tbody = document.querySelector("#car-list");
     tbody.innerHTML = '';
     cars.forEach(car => {
@@ -121,31 +179,75 @@
         <td class="px-3">${car.Mileage}</td>
         <td class="px-3">${car.Price}</td>
         <td class="px-3 ${car.Status === 'Available' ? 'text-green-600' : car.Status === 'Pending' ? 'text-yellow-600' : 'text-red-500'}">${car.Status}</td>
-        <td class="px-3 text-center">
-          <a href="car.html?id=${car.ID}" class="px-4 py-1.5 rounded-full border border-[#7b5dd7] text-xs text-[#7b5dd7] hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">View</a>
+<td class="px-3 text-center">
+  <a href="/?id=${car.ID}" class="px-4 py-1.5 rounded-full border border-[#7b5dd7] text-xs text-[#7b5dd7] hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">
+    View
+  </a>
         </td>`;
       tbody.appendChild(row);
     });
   }
 
-  function getSearch() {
+
+function getSearch() {
     const term = document.querySelector("#search").value.trim().toLowerCase();
     if(term.length > 0){
-      fetch('/api/cars/search', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({term: term})
-      }).then(res => res.json()).then(displayCars)
-      .catch(error => {
+    fetch('/api/cars/search', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({term})
+    }).then(res => res.json()).then(displayCars)
+     .catch(error => {
       console.error(error);
       alert("Search failed. Please try again.");
     });
-    } else {
-      fetchCars();
-    }
+  } else {
+    fetchCars();
   }
+}
 
-  fetchCars();
+
+function loadCar() {
+  fetch(`/api/cars/${carId}`)
+    .then(res => res.json())
+    .then(data => {
+      carData = data;
+      Brand.value = data.Brand;
+      Model.value = data.Model;
+      Year.value = data.Year;
+      Fuel.value = data.Fuel;
+      Transmission.value = data.Transmission;
+      Mileage.value = data.Mileage;
+      Price.value = data.Price;
+      Status.value = data.Status;
+    });
+}
+
+
+function saveStatus() {
+  const updated = {
+    ...carData,
+    Brand: Brand.value,
+    Model: Model.value,
+    Year: Year.value,
+    Fuel: Fuel.value,
+    Transmission: Transmission.value,
+    Mileage: Mileage.value,
+    Price: Price.value,
+    Status: Status.value
+  };
+
+  fetch('/api/cars/save', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(updated)
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("Status updated!");
+    window.location.href = "/";
+  });
+}
 </script>
 
 </body>

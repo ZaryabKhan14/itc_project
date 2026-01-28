@@ -12,26 +12,24 @@ def load_cars():
     try:
         with open('cars.json', 'r') as f:
             cars = json.load(f)
-            for car in cars:
-                car['Brand'] = car.get('Brand', '').strip()
-                car['Model'] = car.get('Model', '').strip()
+           
     except FileNotFoundError:
         cars = []
+
+load_cars()
 
 def save_cars_to_file():
     """Save cars back to JSON file"""
     with open('cars.json', 'w') as f:
         json.dump(cars, f, indent=4)
 
-load_cars()
+
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
-@app.route("/car.html")
-def car_page():
-    return render_template('car.html')
+
 
 @app.route("/api/cars")
 def get_cars():
@@ -62,13 +60,11 @@ def search_cars():
     data = request.get_json()
     term = data.get('term', '').strip().lower()
 
-    filtered_cars = []
-    for car in cars:
-        brand = car.get('Brand', '').strip().lower()
-        model = car.get('Model', '').strip().lower()
-        if term in brand or term in model:  
-            filtered_cars.append(car)
-    
+    filtered_cars = [
+        car for car in cars
+        if term in car.get('Brand', '').strip().lower() 
+           or term in car.get('Model', '').strip().lower()
+    ]
     print("Filtered:", filtered_cars) 
 
     return jsonify(filtered_cars)
