@@ -25,36 +25,36 @@
       <form id="car-form" class="px-6 py-4 space-y-2">
         <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
           <label class="text-sm font-semibold text-[#4b3c7a]">Brand</label>
-          <input id="Brand" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          <input id="Brand"  class="bg-transparent text-sm text-[#4b3c7a]" />
         </div>
         <div class="flex gap-2">
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Model</label>
-            <input id="Model" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+            <input id="Model"  class="bg-transparent text-sm text-[#4b3c7a]" />
           </div>
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Year</label>
-            <input id="Year" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+            <input id="Year"  class="bg-transparent text-sm text-[#4b3c7a]" />
           </div>
         </div>
         <div class="bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
           <label class="text-sm font-semibold text-[#4b3c7a]">Fuel</label>
-          <input id="Fuel" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+          <input id="Fuel"  class="bg-transparent text-sm text-[#4b3c7a]" />
         </div>
         <div class="flex gap-2">
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Transmission</label>
-            <input id="Transmission" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+            <input id="Transmission"  class="bg-transparent text-sm text-[#4b3c7a]" />
           </div>
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Mileage</label>
-            <input id="Mileage" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+            <input id="Mileage"  class="bg-transparent text-sm text-[#4b3c7a]" />
           </div>
         </div>
         <div class="flex gap-2">
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Price</label>
-            <input id="Price" readonly class="bg-transparent text-sm text-[#4b3c7a]" />
+            <input id="Price"  class="bg-transparent text-sm text-[#4b3c7a]" />
           </div>
           <div class="flex-1 bg-[#f7f5fd] rounded-xl px-3 py-1.5 shadow-sm">
             <label class="text-sm font-semibold text-[#4b3c7a]">Status</label>
@@ -90,11 +90,24 @@
         document.getElementById('Mileage').value = data.Mileage;
         document.getElementById('Price').value = data.Price;
         document.getElementById('Status').value = data.Status;
+      })
+      .catch(error => {
+        console.error(error);
+
+        alert("Unable to load car details. Please try again later.");
       });
   }
 
   function saveStatus() {
-    const updated = {...carData, Status: document.getElementById('Status').value };
+    const updated = {...carData, Status: document.getElementById('Status').value,
+    brand: document.getElementById('Brand').value,
+    Model: document.getElementById('Model').value,
+    Year: document.getElementById('Year').value,
+    Fuel: document.getElementById('Fuel').value,
+    Transmission: document.getElementById('Transmission').value,
+    Mileage: document.getElementById('Mileage').value,
+    Price: document.getElementById('Price').value
+   };
     fetch('/api/cars/save', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
@@ -106,6 +119,11 @@
       loadCar();
       window.location.href = "/";
 
+    })
+    .catch(error => {
+      console.error(error);
+
+      alert("Failed to save data. Please try again.");
     });
   }
 

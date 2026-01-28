@@ -4,7 +4,6 @@ from flask import Flask, request, render_template, jsonify
 
 app = Flask(__name__)
 
-# ---------------- Global cars data ----------------
 cars = []
 
 def load_cars():
@@ -13,7 +12,6 @@ def load_cars():
     try:
         with open('cars.json', 'r') as f:
             cars = json.load(f)
-            # Trim spaces and normalize case for all brands/models
             for car in cars:
                 car['Brand'] = car.get('Brand', '').strip()
                 car['Model'] = car.get('Model', '').strip()
@@ -25,20 +23,16 @@ def save_cars_to_file():
     with open('cars.json', 'w') as f:
         json.dump(cars, f, indent=4)
 
-# Initialize cars data on startup
 load_cars()
 
-# ---------------- Root Route ----------------
 @app.route("/")
 def index():
     return render_template('index.html')
 
-# ---------------- Car Details Page ----------------
 @app.route("/car.html")
 def car_page():
     return render_template('car.html')
 
-# ---------------- API Routes ----------------
 @app.route("/api/cars")
 def get_cars():
     return jsonify(cars)
@@ -63,7 +57,6 @@ def save_car():
             
     return jsonify({"error": "Car not found"}), 404
 
-# ---------------- Search Cars ----------------
 @app.route("/api/cars/search", methods=['POST'])
 def search_cars():
     data = request.get_json()
@@ -73,13 +66,13 @@ def search_cars():
     for car in cars:
         brand = car.get('Brand', '').strip().lower()
         model = car.get('Model', '').strip().lower()
-        if term in brand or term in model:  # Match partial or full text
+        if term in brand or term in model:  
             filtered_cars.append(car)
     
-    print("Filtered:", filtered_cars)  # debug
+    print("Filtered:", filtered_cars) 
 
     return jsonify(filtered_cars)
 
-# ---------------- Run App ----------------
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5500)

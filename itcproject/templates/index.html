@@ -17,7 +17,7 @@
     <div><img src="{{ url_for('static', filename='Adobe Express - file (1).png') }}" alt="LuxeWheels Logo" class="h-32 md:h-36"></div>
     <div class="flex space-x-4 items-center">
       <a href="/" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Home</a>
-      <a href="#" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Contact Us</a>
+      {# <a href="#" class="px-4 py-2 border-2 border-[#7b5dd7] rounded-full text-sm hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0] hover:text-white">Contact Us</a> #}
     </div>
   </nav>
 </header>
@@ -28,7 +28,7 @@
         Drive your dreams. Buy, sell, and explore</br>the finest cars in style.
 </p>
   <!-- Buttons -->
-  <div class="flex flex-col sm:flex-row gap-2 mb-4">
+{#  <div class="flex flex-col sm:flex-row gap-2 mb-4">
     <a href="#" class="px-5 py-2 border-2 border-[#7b5dd7] rounded-full text-white text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-[#7b5dd7] hover:to-[#9b72f0]">
       Browse Cars
     </a>
@@ -36,6 +36,7 @@
       Sell Your Car
     </a>
   </div>
+#}
 <!-- Search Section -->
 <div class="w-full max-w-md flex flex-col items-center gap-4 mt-4">
 
@@ -91,12 +92,18 @@
 </section>
 
 <script>
-  // Fetch all cars
   function fetchCars() {
     fetch('/api/cars')
       .then(res => res.json())
-      .then(data => displayCars(data));
+      .then(data => displayCars(data))
+      .catch(error => {
+        console.error(error);
+
+      alert("Unable to load car listings. Please try again later.");
+      });
   }
+  
+  
 
   function displayCars(cars) {
     const tbody = document.querySelector("#car-list");
@@ -128,7 +135,11 @@
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({term: term})
-      }).then(res => res.json()).then(displayCars);
+      }).then(res => res.json()).then(displayCars)
+      .catch(error => {
+      console.error(error);
+      alert("Search failed. Please try again.");
+    });
     } else {
       fetchCars();
     }

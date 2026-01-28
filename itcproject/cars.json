@@ -1,15 +1,16 @@
 [
     {
-        "ID": "001",
+        "Actions": "",
         "Brand": "BMW",
-        "Model": "I8",
-        "Year": 2014,
         "Fuel": "Hybrid",
-        "Transmission": "Automatic",
+        "ID": "001",
         "Mileage": "18,000 km",
+        "Model": "I8",
         "Price": "$58,000",
         "Status": "Available",
-        "Actions": ""
+        "Transmission": "Automatic",
+        "Year": "2015",
+        "brand": "BMW"
     },
     {
         "ID": "002",
